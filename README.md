@@ -9,7 +9,7 @@ Movie reviews will be a database application where users can add movie-reviews. 
 * Maybe also add a feature where the movies may be sorted by 
 ⋅⋅⋅1. genre 
 ⋅⋅⋅2. popularity (score) 
-⋅⋅⋅3. other critereas.⋅⋅ 
+⋅⋅⋅3. other critereas.
 So one can search for a given genre and get a list sorted by the highest scores. 
 * The same movie cannot be added to the database twice, that is if "Titanic" is in the database and one wants to review it one has to add a review to the already existing movie "Titanic" and not add a new "Titanic" to review.
 
