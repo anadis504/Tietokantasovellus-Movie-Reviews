@@ -7,7 +7,7 @@ Movie reviews will be a database application where users can add movie-reviews. 
 * Other users may like and upvote (or maybe also downvote) some reviews so that the most liked/popular/suited reviews stay on top. In other words, the list of the reviews is ordered by users votes. 
 * The amount of the reviews could also be limited. 
 * Maybe also add a feature where the movies may be sorted by 
-⋅⋅⋅genre 
+⋅⋅⋅genre⋅⋅ 
 ⋅⋅⋅ popularity (score) 
 ⋅⋅3. other critereas.
 So one can search for a given genre and get a list sorted by the highest scores. 
