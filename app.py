@@ -2,8 +2,10 @@ from flask import Flask
 from flask import redirect, render_template, request, session
 from os import getenv
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
 app.secret_key = getenv("SECRET_KEY")
 db = SQLAlchemy(app)
 
@@ -20,7 +22,7 @@ def logout():
 def signup():
     username = request.form["username"]
     password = request.form["password"]
-    sqlname = "SELECT COUNT FROM users WHERE username=:username"
+    sqlname = "SELECT COUNT(*) FROM users WHERE username=:username"
     result = db.session.execute(sqlname, {"username":username})
     count = result.fetchone()[0]
     if count != 0:
@@ -38,7 +40,7 @@ def login():
     password = request.form["password"]
     sql = "SELECT password FROM users WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
-    user = result.fetchone()    
+    user = result.fetchone()
     if user == None:
         return redirect("/")    # TODO add an error message
     else:
