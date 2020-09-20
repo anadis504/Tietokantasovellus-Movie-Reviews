@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %} {{title }} {% endblock %}
+{% block content %}
+<h2> {{ title }} </h2>
+
+{% for review in reviews %}
+User: {{ review[1] }} wrote: <br>
+{{ review[2] }} <br>
+at: {{ review[3].strftime("%Y-%m-%d %H:%M:%S") }}
+
+<hr>
+{% endfor %}
+
+{% if session.username %}
+Add a review:
+<form action="/add_review" method="post">
+Review this movie: 
+<textarea name="content" rows="3" cols="40"></textarea>
+<p>
+Score this movie: 
+<input type="radio" name="score" value="1"> 1
+<input type="radio" name="score" value="2"> 2
+<input type="radio" name="score" value="3"> 3
+<input type="radio" name="score" value="4"> 4
+<input type="radio" name="score" value="5"> 5
+<p>
+<input type="submit" value="Send">
+<input type="hidden" name=movie_id value={{movie_id}}>
+</form>
+
+
+{% endif %}
+{% endblock %}

@@ -10,5 +10,9 @@ Search movie by title: <input type="text" name="title">
 <input type="submit" value="Search">
 </form>
 
+{% if session.username %}
+Add movie to database <a href="/add_movie">here</a>
+
+{% endif %}
 {% endblock %}
 
