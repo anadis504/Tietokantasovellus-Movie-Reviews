@@ -23,4 +23,5 @@ The application has some codes and features.
 * Signing in, logging out
 * It is possible to search for a movie already in db and read the reviews, (signed in users can add reviews)
 * Adding movies to database is still not implemented, it is alsmost there
+
 The app can be tested at https://fast-atoll-48246.herokuapp.com/
