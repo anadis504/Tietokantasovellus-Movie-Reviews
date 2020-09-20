@@ -1,20 +1,26 @@
-DROP TABLE IF EXISTS users, movies, genres, reviews, movie_reviews CASCADE;
+DROP TABLE IF EXISTS 
+	users,
+	movies,
+	genres,
+	reviews,
+	movie_reviews
+	CASCADE;
 
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
-	username VARCHAR (24) UNIQUE,
-	password VARCHAR(32) NOT NULL);
+	username TEXT UNIQUE,
+	password TEXT NOT NULL);
 
 
 CREATE TABLE movies (
 	id SERIAL PRIMARY KEY,
-	title VARCHAR (50) NOT NULL UNIQUE,
-	year SMALLINT NOT NULL CHECK (year > 0);
+	title TEXT NOT NULL UNIQUE,
+	year SMALLINT NOT NULL CHECK (year > 0));
 
 
 CREATE TABLE genres (
 	id SERIAL PRIMARY KEY,
-	genre VARCHAR (30) NOT NULL UNIQUE);
+	genre TEXT NOT NULL UNIQUE);
 
 
 CREATE TABLE reviews (
