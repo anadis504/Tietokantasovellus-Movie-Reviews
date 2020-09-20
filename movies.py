@@ -33,7 +33,27 @@ def save_review(movie_id, content, score):
     if user_id == 0:
         return False
     sql = "INSERT INTO reviews (user_id, movie_id, content, created, score) VALUES (:user_id, :movie_id, :content, NOW(), :score)"
-    db.session.execute(sql, {"user_id":user_id, "movie_id":movie_id, "content":content, "score":score})
+    result = db.session.execute(sql, {"user_id":user_id, "movie_id":movie_id, "content":content, "score":score})
+    if result.fetchone()[0] != 0:
+        db.session.commit()
+        return True
+    return False
+
+def save_movie(title, year, genres):
+    user_id = users.user_id()
+    if user_id == 0:
+        return False
+    sql = "INSERT INTO movies (title, year) VALUES (:title, :year)"
+    result = db.session.execute(sql, {"title":title, "year":year})
     db.session.commit()
-    return True
+    id = movie_id(title)
+    if id != 0:
+        for genre in genres:
+            sql = "INSERT INTO movie_genres (movie_id, genre_id) VALUES (:movie_id, :genre_id)"
+            db.session.execute(sql, {"movie_id":id, "genre_id":genre})
+        db.session.commit()
+        return True
+    return False
+
+
 

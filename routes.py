@@ -62,11 +62,15 @@ def add_movie():
     if request.method == "GET":
         return render_template("newmovie.html")
     if request.method == "POST":
-        title = request.form["tilte"]
+        print("know the mothod at least")
+        title = request.form["title"]
         year = request.form["year"]
         genres = request.form.getlist("genre")
-        return render_template("newmovie.html")
-    
+        print("got so far")
+        if movies.save_movie(title, year, genres):
+            return redirect ("/")
+        else:
+            return render_template("error.html",message="Movie not added")
     
     
     
