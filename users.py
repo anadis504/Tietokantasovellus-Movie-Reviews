@@ -29,4 +29,9 @@ def register(username,password):
     return login(username,password)
 
 def user_id():
-    return session.get("username",0)
+    username = session.get("username",0)
+    if username != 0:
+        sql = "SELECT id FROM users WHERE username=:username"
+        result = db.session.execute(sql, {"username":username})
+        return result.fetchone()[0]
+    return 0

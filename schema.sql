@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS
 	movies,
 	genres,
 	reviews,
-	movie_reviews
+	movie_genres
 	CASCADE;
 
 CREATE TABLE users (
@@ -27,11 +27,30 @@ CREATE TABLE reviews (
 	id SERIAL PRIMARY KEY, 
 	content TEXT,
 	user_id INTEGER REFERENCES users,
-	score SMALLINT CHECK (score >= 0 AND score <= 10),
+	movie_id INTEGER REFERENCES movies,
+	score SMALLINT CHECK (score >= 0 AND score <= 5),
 	created TIMESTAMP);
 
+	
+CREATE TABLE movie_genres (
+    id SERIAL PRIMARY KEY,
+    movie_id INTEGER REFERENCES movies,
+    genre_id INTEGER REFERENCES genres);
+	
+	
+INSERT INTO genres(genre) VALUES('Action');
+INSERT INTO genres(genre) VALUES('Adventure');
+INSERT INTO genres(genre) VALUES('Fiction');
+INSERT INTO genres(genre) VALUES('Drama');
+INSERT INTO genres(genre) VALUES('Comedy');
+INSERT INTO genres(genre) VALUES('Horror');
+INSERT INTO genres(genre) VALUES('Western');
+INSERT INTO genres(genre) VALUES('Crime');
+INSERT INTO genres(genre) VALUES('Mystery');
+INSERT INTO genres(genre) VALUES('Romance');
 
-CREATE TABLE movie_reviews (
-	id SERIAL PRIMARY KEY,
-	user_id INTEGER REFERENCES users,
-	review_id INTEGER REFERENCES reviews);
+INSERT INTO movies(title,year) values('Once upon a time', 1909),('Titanic 2',2200),('Best movie ever', 1430);
+
+INSERT INTO users(username,password) values('bana',123),('bob',123);
+
+INSERT INTO reviews(user_id,movie_id,content,created,score) VALUES (1,1,'very good movie',now(),4)
