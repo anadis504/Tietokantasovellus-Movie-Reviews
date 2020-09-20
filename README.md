@@ -16,3 +16,11 @@ So one can search for a given genre and get a list sorted by the highest scores.
 * The same movie cannot be added to the database twice, that is if "Titanic" is in the database and one wants to review it one has to add a review to the already existing movie "Titanic" and not add a new "Titanic" to review.
 
 The application will be written in Python. The users will have to authenticate themselves to the application (sing in) so that the users may be identified by their usernames. The application will have to have a possibility for signing up (creating a usersname+password).
+
+As of 20.09.2020
+The application has some codes and features. 
+* The registering of users is working
+* Signing in, logging out
+* It is possible to search for a movie already in db and read the reviews, (signed in users can add reviews)
+* Adding movies to database is still not implemented, it is alsmost there
+The app can be tested at https://fast-atoll-48246.herokuapp.com/
