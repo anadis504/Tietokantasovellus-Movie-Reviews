@@ -48,7 +48,7 @@ def login():
         if check_password_hash(hash_value,password):
             session["username"] = username
         else:
-            return redirect("/signup")
-        return redirect("/signup")
+            return redirect("/")
+        return redirect("/")
 
 
