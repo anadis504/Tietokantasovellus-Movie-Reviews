@@ -22,6 +22,11 @@ The application has some codes and features.
 * The registering of users is working
 * Signing in, logging out
 * It is possible to search for a movie already in db and read the reviews, (signed in users can add reviews)
-* Adding movies to database is still not implemented, it is alsmost there
+* Adding movies to database is also now working
+
+Next steps:
+* make the code more error resistent
+* definitely do something about the layout
+* add features as mentioned above
 
 The app can be tested at https://fast-atoll-48246.herokuapp.com/
