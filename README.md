@@ -30,10 +30,13 @@ Next steps:
 * add features as mentioned above
 
 The result.fetchone() does not work and gives a lot of errors all the time. For example this line of code form Osa 2, Esimerkki: Kyselyt:
+    
     sql = "INSERT INTO polls (topic, created_at) VALUES (:topic, NOW()) RETURNING id"
     result = db.session.execute(sql, {"topic":topic})
     poll_id = result.fetchone()[0]
     
-does not work with me as it is explained to do in the materials. Now the adding of reviews does not work in heroku so I have to fix this later somehow. Would love to get some advice!!! Or otherwise if my code is somehow totally weird (this is my first time with python).
+does not work with me as it is explained to do in the materials. Now the adding of reviews does not work in heroku so I have to fix this later somehow. Would love to get some advice!!! Or otherwise if my code is somehow totally weird (this is my first time with python) would love to hear about it.
+
+I have removed the fetchone()[0] things and now it somehow works.
 
 The app can be tested at https://fast-atoll-48246.herokuapp.com/
