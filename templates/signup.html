@@ -1,7 +1,7 @@
-{% if session.username %}
-<p>User: {{ session.username }}</p>
-<a href="/logout">Logout</a>
-{% else %}
+{% extends "layout.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+
 Create an account
 <form action="/signup" method="POST">
 <p>Username:<br>
@@ -10,6 +10,6 @@ Create an account
 <input type="password" name="password"></p>
 <input type="submit" value="Create user">
 </form>
-Already a user? <a href="/login">Login</a>
 
-{% endif %}
+{% endblock %}
+

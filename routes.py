@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, request, redirect
-import users
+import users, movies
 
 @app.route("/login", methods=["get","post"])
 def login():
@@ -33,4 +33,9 @@ def register():
 
 @app.route("/")
 def index():
-    return render_template("signup.html")
+    return render_template("index.html")
+
+@app.route("/search")
+def searchMovieByTitle():
+    title = request.args["title"]
+    return movies.movie_reviews(title)

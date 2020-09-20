@@ -1,0 +1,14 @@
+<!doctype html>
+<title>Movie Reviews application - {% block title %}{% endblock %}</title>
+<h1>Movie Reviews</h1>
+<a href="/">Startpage</a>
+{% if session.username %}
+<p>User: {{ session.username }}</p>
+<a href="/logout">Logout</a>
+{% else %}
+<a href="/login">Login</a>
+<a href="/signup">Register</a>
+{% endif %}
+<hr>
+{% block content %}{% endblock %}
+<hr>
