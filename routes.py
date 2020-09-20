@@ -35,7 +35,7 @@ def register():
 def index():
     return render_template("index.html")
 
-@app.route("/search" methods=["get"])
+@app.route("/search", methods=["get"])
 def search_movie_by_title():
     title = request.args["title"]
     print(title)
