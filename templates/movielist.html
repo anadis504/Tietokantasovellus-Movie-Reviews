@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}Search result{% endblock %}
+{% block content %}
+
+<hr>
+{% for movie in movies %}
+<a href="/show_reviews/{{ movie[0] }}"> {{ movie[1] }} </a> ({{ movie[2] }})<br>
+
+
+{% endfor %}
+{% if session.username %}
+<br>
+Movie your looking for not in the database? <a href="/add_movie">Add movie</a>
+
+{% endif %}
+{% endblock %}

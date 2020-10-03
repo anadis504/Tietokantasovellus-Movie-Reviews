@@ -1,8 +1,14 @@
 {% extends "layout.html" %}
 {% block title %} {{title }} {% endblock %}
 {% block content %}
-<h2> {{ title }} </h2>
-
+<h2> {{ specs[0][0] }} ({{ specs[0][1] }}) </h2>
+[
+{% for genre in specs %}
+{{ genre[2] }}
+{% endfor %}
+]
+<br>
+<br>
 {% for review in reviews %}
 User: {{ review[1] }} wrote: <br>
 {{ review[2] }} <br>

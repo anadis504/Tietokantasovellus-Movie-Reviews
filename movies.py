@@ -2,29 +2,42 @@ from db import db
 from flask import session
 import users
 
-def movie_reviews(title):
-    id = movie_id(title)
-    print(id)
-    if id != 0:
-        sql = "SELECT m.title, u.username, r.content, r.created, r.score FROM reviews r LEFT JOIN users u ON u.id=r.user_id LEFT JOIN movies m ON m.id = r.movie_id WHERE m.id=:id ORDER BY r.created DESC;"
-
-        result = db.session.execute(sql, {"id":id})
-        reviews = result.fetchall()
-        print(reviews)
-        return(reviews)
-    else:
-        print("No movie found")
-        return("No movie found")
+def movie_reviews(mov_id):
+    
+    print(mov_id)
+    sql = "SELECT m.title, u.username, r.content, r.created, r.score FROM reviews r LEFT JOIN users u ON u.id = r.user_id LEFT JOIN movies m ON m.id = r.movie_id WHERE m.id = :id ORDER BY r.created DESC;"
+    result = db.session.execute(sql, {"id":mov_id})
+    print("We are here!")
+    reviews = result.fetchall()
+    print(reviews)
+    return reviews
         
-
+def get_movie_list(title):
+    mov_ids = movie_id(title)
+    print(mov_ids)
+    if mov_ids != 0:
+        
+        sql = "SELECT m.id, m.title, m.year FROM movies m WHERE m.id = ANY(:ids);"
+        result = db.session.execute(sql, {"ids":mov_ids})
+        movies = result.fetchall()
+        return movies
+    return 0;
+        
 def movie_id(title):
-    sql = "SELECT id FROM movies WHERE title=:title"
-    result = db.session.execute(sql, {"title":title})
-    id = result.fetchone()[0]
-    if  id != None:
-        print("or here??")
-        print(id)
-        return id    
+    sql = "SELECT id FROM movies WHERE title LIKE :title"
+    result = db.session.execute(sql, {"title":"%"+title+"%"})
+    idlist = result.fetchall()
+    if  len(idlist) != 0:
+        print("Id is not none??")
+        print(len(idlist))
+        print(type(idlist))
+        ids = []
+        for subl in idlist:
+            for item in subl:
+                if item != 0 and item != None:
+                    ids.append(item)
+        print(ids)
+        return ids    
     print("Nothing is found")
     return 0
 
@@ -52,6 +65,20 @@ def save_movie(title, year, genres):
         db.session.commit()
         return True
     return False
+
+def movie_with_genres(mov_id):
+    sql = "SELECT m.title, m.year, g.genre FROM movies m LEFT JOIN movie_genres mg ON m.id = mg.movie_id LEFT JOIN genres g ON mg.genre_id = g.id where m.id = :id;"
+    result = db.session.execute(sql, {"id":mov_id})
+    title_genres = result.fetchall()
+    return title_genres
+
+def get_by_score():
+    sql = "SELECT m.id, m.title, m.year, CAST(AVG(r.score) AS DECIMAL (10,1)) s FROM movies m LEFT JOIN reviews r ON m.id = r.movie_id GROUP BY m.id ORDER BY s ASC LIMIT 20;"
+    result = db.session.execute(sql)
+    top_movies = result.fetchall()
+    return top_movies
+
+
 
 
 
