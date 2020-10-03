@@ -54,14 +54,15 @@ def save_movie(title, year, genres):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "INSERT INTO movies (title, year) VALUES (:title, :year)"
+    sql = "INSERT INTO movies (title, year) VALUES (:title, :year) RETURNING id;"
     result = db.session.execute(sql, {"title":title, "year":year})
+    mov_id = result.fetchone()[0]
     db.session.commit()
-    id = movie_id(title)
-    if id != 0:
+    if mov_id != 0:
         for genre in genres:
             sql = "INSERT INTO movie_genres (movie_id, genre_id) VALUES (:movie_id, :genre_id)"
-            db.session.execute(sql, {"movie_id":id, "genre_id":genre})
+            db.session.execute(sql, {"movie_id":mov_id, "genre_id":genre})
+            print(genre)
         db.session.commit()
         return True
     return False
@@ -73,7 +74,7 @@ def movie_with_genres(mov_id):
     return title_genres
 
 def get_by_score():
-    sql = "SELECT m.id, m.title, m.year, CAST(AVG(r.score) AS DECIMAL (10,1)) s FROM movies m LEFT JOIN reviews r ON m.id = r.movie_id GROUP BY m.id ORDER BY s ASC LIMIT 20;"
+    sql = "SELECT m.id, m.title, m.year, COALESCE(CAST(AVG(r.score) AS DECIMAL (10,1)),0) s FROM movies m LEFT JOIN reviews r ON m.id = r.movie_id GROUP BY m.id ORDER BY s DESC LIMIT 20;"
     result = db.session.execute(sql)
     top_movies = result.fetchall()
     return top_movies

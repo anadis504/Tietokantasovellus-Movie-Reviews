@@ -1,25 +1,33 @@
 {% extends "layout.html" %}
 {% block title %}Startpage{% endblock %}
 {% block content %}
-<h2>Startpage</h2>
-<h3>Welcome to Movie Reviews application!</h3>
-<br>
-<form action="/search" method="GET">
-Search movie by title: <input type="text" name="title">
-<br>
-<input type="submit" value="Search">
-</form>
+<div class="container">
+    <div class="row">
+        <h3>Welcome to Movie Reviews application!</h3>
+    </div>
+    
+        <form class="form-inline" action="/search" method="GET">
+            <label for="movieSearch" class="mr-sm-2">Search for a movie</label>
+            <input type="text" class="form-control mr-sm-2" name="title">
+            <button type="submit" class="btn btn-primary mr-sm-2">Search</button>
+        </form>
+    
 <br>
 {% if session.username %}
 <a href="/add_movie">Or add new movie to database</a>
-
 {% endif %}
-
+<div class="row">
 <h4>Top 20 movies</h4>
-
+</div>
+<div class="row">
+<ul class="list-group">
 {% for movie in movies %}
-<a href="/show_reviews/{{ movie[0] }}"> {{ movie[1] }} </a> ({{ movie[2] }}) score: {{ movie[3] }} <br>
-
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+    <a href="/show_reviews/{{ movie[0] }}"> {{ movie[1] }} ({{ movie[2] }}) </a>
+    <span class="badge badge-primary badge-pill"> {{ movie[3] }} </span>
+    </li>
 {% endfor %}
+</ul>
+</div>
 {% endblock %}
 
