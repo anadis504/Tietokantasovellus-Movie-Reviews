@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS
 
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
-	username TEXT UNIQUE,
+	username TEXT UNIQUE NOT NULL,
 	password TEXT NOT NULL);
 
 
@@ -52,5 +52,7 @@ INSERT INTO genres(genre) VALUES('Romance');
 INSERT INTO movies(title,year) values('Once upon a time', 1909),('Titanic 2',2200),('Best movie ever', 1430);
 
 INSERT INTO users(username,password) values('bana',123),('bob',123);
+
+INSERT INTO movie_genres(movie_id,genre_id) VALUES(1,1),(1,2),(2,3),(2,4),(3,5),(3,6),(3,7),(3,8),(2,9),(1,10);
 
 INSERT INTO reviews(user_id,movie_id,content,created,score) VALUES (1,1,'very good movie',now(),4)
