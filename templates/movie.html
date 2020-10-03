@@ -1,21 +1,34 @@
 {% extends "layout.html" %}
 {% block title %} {{title }} {% endblock %}
 {% block content %}
+<div class="container">
 <h2> {{ specs[0][0] }} ({{ specs[0][1] }}) </h2>
-[
-{% for genre in specs %}
-{{ genre[2] }}
-{% endfor %}
-]
+<nav class="navbar navbar-expand-sm navbar-light">
+        <a class="navbar-brand">Genres:</a>
+        <ul class="navbar-nav">
+            
+            {% for genre in specs %}
+            <li class="nav-item">
+            <a class="nav-link">{{ genre[2] }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+</nav>
 <br>
 <br>
-{% for review in reviews %}
-User: {{ review[1] }} wrote: <br>
-{{ review[2] }} <br>
-at: {{ review[3].strftime("%Y-%m-%d %H:%M:%S") }}
+<table class="table">
+    <tr class="row">
+    {% for review in reviews %}
+    <th class="col-2">{{ review[1] }}</th>
+        <td class="col-7">{{ review[2] }}</td>
+        <td class="col-2">{{ review[3].strftime("%Y-%m-%d %H:%M:%S") }}</td>
+        <td class="col-1">{{ review[4] }}</td>
+    {% endfor %}
+    </tr>
+</table>
 
 <hr>
-{% endfor %}
+
 
 {% if session.username %}
 Add a review:

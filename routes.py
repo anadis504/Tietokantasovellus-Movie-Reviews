@@ -61,7 +61,7 @@ def add_review():
     content = request.form["content"]
     score = request.form["score"]
     if movies.save_review(movie_id, content, score):
-        return redirect("/")
+        return redirect("/show_reviews/"+movie_id)
     else:
         return render_template("error.html",message="Review did not succeed")
 

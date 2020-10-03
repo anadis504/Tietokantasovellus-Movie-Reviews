@@ -5,7 +5,7 @@ import users
 def movie_reviews(mov_id):
     
     print(mov_id)
-    sql = "SELECT m.title, u.username, r.content, r.created, r.score FROM reviews r LEFT JOIN users u ON u.id = r.user_id LEFT JOIN movies m ON m.id = r.movie_id WHERE m.id = :id ORDER BY r.created DESC;"
+    sql = "SELECT m.title, u.username, r.content, r.created, r.score FROM reviews r LEFT JOIN users u ON u.id = r.user_id LEFT JOIN movies m ON m.id = r.movie_id WHERE m.id = :id ORDER BY r.created DESC LIMIT 25;"
     result = db.session.execute(sql, {"id":mov_id})
     print("We are here!")
     reviews = result.fetchall()

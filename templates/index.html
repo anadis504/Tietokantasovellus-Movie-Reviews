@@ -9,25 +9,30 @@
         <form class="form-inline" action="/search" method="GET">
             <label for="movieSearch" class="mr-sm-2">Search for a movie</label>
             <input type="text" class="form-control mr-sm-2" name="title">
-            <button type="submit" class="btn btn-primary mr-sm-2">Search</button>
+            <button type="submit" class="btn btn-dark mr-sm-2">Search</button>
         </form>
     
 <br>
+
 {% if session.username %}
+<div class="row">
 <a href="/add_movie">Or add new movie to database</a>
+</div>
 {% endif %}
 <div class="row">
 <h4>Top 20 movies</h4>
 </div>
 <div class="row">
+<div class="col-5">
 <ul class="list-group">
 {% for movie in movies %}
     <li class="list-group-item d-flex justify-content-between align-items-center">
-    <a href="/show_reviews/{{ movie[0] }}"> {{ movie[1] }} ({{ movie[2] }}) </a>
-    <span class="badge badge-primary badge-pill"> {{ movie[3] }} </span>
+    <a href="/show_reviews/{{ movie[0] }}" class="text-info"> {{ movie[1] }}  ({{ movie[2] }}) </a>
+    <span class="badge badge-success badge-pill"> {{ movie[3] }} </span>
     </li>
 {% endfor %}
 </ul>
+</div>
 </div>
 {% endblock %}
 
