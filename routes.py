@@ -70,6 +70,7 @@ def add_review():
     movie_id = request.form["movie_id"]
     content = request.form["content"]
     score = request.form["score"]
+    print(score)
     if movies.save_review(movie_id, content, score):
         return redirect("/show_reviews/"+movie_id)
     else:
@@ -85,8 +86,9 @@ def add_movie():
         year = request.form["year"]
         genres = request.form.getlist("genre")
         print("got so far")
-        if movies.save_movie(title, year, genres):
-            return redirect ("/")
+        mov_id = movies.save_movie(title, year, genres)
+        if mov_id > 0:
+            return redirect("/show_reviews/"+str(mov_id))
         else:
             return render_template("error.html",message="Movie not added")
     

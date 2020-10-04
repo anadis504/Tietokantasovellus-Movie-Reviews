@@ -2,25 +2,68 @@
 {% block title %}Add movie{% endblock %}
 {% block content %}
 <h2>Add a movie to the database</h2>
-<h3>Welcome to Movie Reviews!</h3>
 <br>
 {% if session.username %}
 <form action="/add_movie" method="POST">
-Movie title: <input type="text" name="title">
+<div class="form-group">
+<label for="title">Movie title:</label>
+<input type="text" class="form-control" placeholder="title of the movie" name="title" required>
+</div>
+<div class="form-group">
+<label for="year">Year of release:</label>
+<input type="text" class="form-control" placeholder="xxxx" name="year" required>
+</div>
 <br>
-Release year: <input type="text" name="year">
-<br>
-<input type="checkbox" name="genre" value="1"> Action
-<input type="checkbox" name="genre" value="2"> Adventure
-<input type="checkbox" name="genre" value="3"> Fiction
-<input type="checkbox" name="genre" value="4"> Drama
-<input type="checkbox" name="genre" value="5"> Comedy
-<input type="checkbox" name="genre" value="6"> Horror
-<input type="checkbox" name="genre" value="7"> Western
-<input type="checkbox" name="genre" value="8"> Crime
-<input type="checkbox" name="genre" value="9"> Mystery
-<input type="checkbox" name="genre" value="10"> Romance
-<p>
+<div class="form-check-inline">
+  <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" name="genre" value="1">Action
+  </label>
+</div>
+<div class="form-check-inline">
+  <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" name="genre" value="2">Adventure
+  </label>
+</div>
+<div class="form-check-inline">
+  <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" name="genre" value="3">Fiction
+  </label>
+</div>
+<div class="form-check-inline">
+  <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" name="genre" value="4">Drama
+  </label>
+</div>
+<div class="form-check-inline">
+  <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" name="genre" value="5">Comedy
+  </label>
+</div>
+<div class="form-check-inline">
+  <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" name="genre" value="6">Horror
+  </label>
+</div>
+<div class="form-check-inline">
+  <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" name="genre" value="7">Western
+  </label>
+</div>
+<div class="form-check-inline">
+  <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" name="genre" value="8">Crime
+  </label>
+</div>
+<div class="form-check-inline">
+  <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" name="genre" value="9">Mystery
+  </label>
+</div>
+<div class="form-check-inline">
+  <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" name="genre" value="10">Romance
+  </label>
+</div>
 <input type="submit" value="Add movie">
 </form>
 

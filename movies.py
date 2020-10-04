@@ -52,20 +52,27 @@ def save_review(movie_id, content, score):
     
 def save_movie(title, year, genres):
     user_id = users.user_id()
+    mov_id = 0;
     if user_id == 0:
-        return False
-    sql = "INSERT INTO movies (title, year) VALUES (:title, :year) RETURNING id;"
-    result = db.session.execute(sql, {"title":title, "year":year})
-    mov_id = result.fetchone()[0]
-    db.session.commit()
+        return 0
+    try:
+        sql = "INSERT INTO movies (title, year) VALUES (:title, :year) RETURNING id;"
+        result = db.session.execute(sql, {"title":title, "year":year})
+        mov_id = result.fetchone()[0]
+        print(mov_id)
+        db.session.commit()
+    except:
+        return 0
+    print("Here is the mov id")
+    print(mov_id)
     if mov_id != 0:
         for genre in genres:
             sql = "INSERT INTO movie_genres (movie_id, genre_id) VALUES (:movie_id, :genre_id)"
             db.session.execute(sql, {"movie_id":mov_id, "genre_id":genre})
             print(genre)
         db.session.commit()
-        return True
-    return False
+        return mov_id
+    return 0
 
 def movie_with_genres(mov_id):
     sql = "SELECT m.title, m.year, g.genre, COALESCE(g.id,0) FROM movies m LEFT JOIN movie_genres mg ON m.id = mg.movie_id LEFT JOIN genres g ON mg.genre_id = g.id WHERE m.id = :id;"
@@ -83,7 +90,6 @@ def get_movielist_by_genre(genre_id):
     sql = "SELECT m.id, m.title, m.year, g.genre FROM movies m LEFT JOIN movie_genres mg ON m.id=mg.movie_id LEFT JOIN genres g ON g.id=mg.genre_id WHERE g.id=:id;"
     result = db.session.execute(sql, {"id":genre_id})
     movie_list = result.fetchall()
-    print(len(movie_list) + " " + type(movie_list) + " " + movie_list)
     return movie_list
 
 
