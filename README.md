@@ -17,7 +17,7 @@ So one can search for a given genre and get a list sorted by the highest scores.
 
 The application will be written in Python. The users will have to authenticate themselves to the application (sing in) so that the users may be identified by their usernames. The application will have to have a possibility for signing up (creating a usersname+password).
 
-As of 20.09.2020
+## As of 20.09.2020
 The application has some codes and features. 
 * The registering of users is working
 * Signing in, logging out
@@ -38,5 +38,19 @@ The result.fetchone() does not work and gives a lot of errors all the time. For 
 does not work with me as it is explained to do in the materials. Now the adding of reviews does not work in heroku so I have to fix this later somehow. Would love to get some advice!!! Or otherwise if my code is somehow totally weird (this is my first time with python) would love to hear about it.
 
 I have removed the fetchone()[0] things and now it somehow works.
+
+The app can be tested at https://fast-atoll-48246.herokuapp.com/
+
+## As of 4.10.2020
+The application has most of its features
+* Not registered visitors may search for movies and read other's reviews
+* Registered logged in users can add movies to database and post reviews
+* Forms are validated and errormessages are displayed
+* Movies can be displayed by genre by clicking the genre link in a movie-site. I should probably add the feature to the startpage also though.
+* Bootstrap4 is implemented for layout and form validation. Form validation is also implemented at the database levels.
+##### Other features I would like to implement:
+* CSS for more customized layout
+* Down- and up-voting of reviews so that the most popular (upvoted) reviews are listed first. Also restrict the number of reviews shown (Not yet implemented)
+* Maybe add a function for showing some sort of a profile page listing a users reviews if I have the time.
 
 The app can be tested at https://fast-atoll-48246.herokuapp.com/
