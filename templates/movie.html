@@ -9,7 +9,7 @@
             
             {% for genre in specs %}
             <li class="nav-item">
-            <a class="nav-link">{{ genre[2] }}</a>
+            <a class="nav-link" href="/search/{{ genre[3] }}">{{ genre[2] }}</a>
             </li>
             {% endfor %}
         </ul>
@@ -19,15 +19,15 @@
 <table class="table">
     <tr class="row">
     {% for review in reviews %}
-    <th class="col-2">{{ review[1] }}</th>
-        <td class="col-7">{{ review[2] }}</td>
+    <th class="col-1">{{ review[1] }}</th>
+        <td class="col-1"><span class="bagde badge-warning badge-pill">{{ review[4] }}</span></td>
+        <td class="col-8">{{ review[2] }}</td>
         <td class="col-2">{{ review[3].strftime("%Y-%m-%d %H:%M:%S") }}</td>
-        <td class="col-1">{{ review[4] }}</td>
+        
     {% endfor %}
     </tr>
 </table>
 
-<hr>
 
 
 {% if session.username %}

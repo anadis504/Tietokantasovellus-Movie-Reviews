@@ -19,8 +19,8 @@ def get_movie_list(title):
         
         sql = "SELECT m.id, m.title, m.year FROM movies m WHERE m.id = ANY(:ids);"
         result = db.session.execute(sql, {"ids":mov_ids})
-        movies = result.fetchall()
-        return movies
+        movie_list = result.fetchall()
+        return movie_list
     return 0;
         
 def movie_id(title):
@@ -68,7 +68,7 @@ def save_movie(title, year, genres):
     return False
 
 def movie_with_genres(mov_id):
-    sql = "SELECT m.title, m.year, g.genre FROM movies m LEFT JOIN movie_genres mg ON m.id = mg.movie_id LEFT JOIN genres g ON mg.genre_id = g.id where m.id = :id;"
+    sql = "SELECT m.title, m.year, g.genre, COALESCE(g.id,0) FROM movies m LEFT JOIN movie_genres mg ON m.id = mg.movie_id LEFT JOIN genres g ON mg.genre_id = g.id WHERE m.id = :id;"
     result = db.session.execute(sql, {"id":mov_id})
     title_genres = result.fetchall()
     return title_genres
@@ -78,6 +78,13 @@ def get_by_score():
     result = db.session.execute(sql)
     top_movies = result.fetchall()
     return top_movies
+
+def get_movielist_by_genre(genre_id):
+    sql = "SELECT m.id, m.title, m.year, g.genre FROM movies m LEFT JOIN movie_genres mg ON m.id=mg.movie_id LEFT JOIN genres g ON g.id=mg.genre_id WHERE g.id=:id;"
+    result = db.session.execute(sql, {"id":genre_id})
+    movie_list = result.fetchall()
+    print(len(movie_list) + " " + type(movie_list) + " " + movie_list)
+    return movie_list
 
 
 

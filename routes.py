@@ -47,12 +47,22 @@ def search_movie_by_title():
     if movie_list == 0:
         title = "Movie: " + title + "is not in the database"
         return render_template("error.html", message=title)
-    return render_template("movielist.html", movies= movie_list)
+    return render_template("movielist.html", title="Search result for: "+title, movies= movie_list)
+
+@app.route("/search/<int:genre_id>")
+def search_movie_by_genre(genre_id):
+    print(genre_id)
+    if genre_id == 0:
+        title = "No genre selected"
+        return render_template("error.html", message=title)
+    movie_list = movies.get_movielist_by_genre(genre_id)
+    title = "Search result for genre: " + movie_list[0][3]
+    return render_template("movielist.html", title=title, movies= movie_list)
 
 @app.route("/show_reviews/<int:m_id>")
 def show_reviews(m_id):
     movie_genres = movies.movie_with_genres(m_id)
-    reviews = movies.movie_reviews(m_id)        
+    reviews = movies.movie_reviews(m_id) 
     return render_template("movie.html", reviews=reviews, movie_id=m_id, specs=movie_genres) 
 
 @app.route("/add_review", methods=["post"])

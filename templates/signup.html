@@ -1,15 +1,29 @@
 {% extends "layout.html" %}
 {% block title %}Register{% endblock %}
 {% block content %}
+<div class="container">
+{% if session.username %}
+<p> You are already registered </p>
+{% else %} 
+<h3>Create an account</h3>
+<div class="row">
 
-Create an account
-<form action="/signup" method="POST">
-<p>Username:<br>
-<input type="text" name="username"></p>
-<p>Password:<br>
-<input type="password" name="password"></p>
-<input type="submit" value="Create user">
+<br>
+<form action="/signup" method="post">
+    <div class="form-group">
+        <label for="inputUsername">Username</label>
+        <input type="text" class="form-control" name="username">
+    </div>
+    <div class="form-group">
+        <label for="inputPassword">Password</label>
+        <input type="password" class="form-control" name="password">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Register</button>
+    </div>
 </form>
+</div>
 
+{% endif %}
 {% endblock %}
 
